@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AppVLayoutQiu/AppVLayoutQiu.iml" filepath="$PROJECT_DIR$/AppVLayoutQiu/AppVLayoutQiu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyValyout.iml" filepath="$PROJECT_DIR$/MyValyout.iml" />
+    </modules>
+  </component>
+</project>
