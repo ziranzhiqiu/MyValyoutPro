@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide;
 import com.youth.banner.loader.ImageLoader;
 
 /**
- * Created by zxl on 2017/12/11.
+ * Created by JsonQiu on 2017/12/11.
  */
 
 public class GlideImageLoader extends ImageLoader {
@@ -16,7 +16,7 @@ public class GlideImageLoader extends ImageLoader {
         //Glide 加载图片简单用法
         Glide.with(context)
                 .load(path)
-//                .placeholder(R.drawable.ic_image_default)
+                .placeholder(R.mipmap.app_log)
                 .into(imageView);
     }
 }

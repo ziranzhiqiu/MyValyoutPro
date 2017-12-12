@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+/**
+ * Created by JsonQiu on 2017/12/10.
+ */
 public class SplashActivity extends AppCompatActivity {
 
     @Override

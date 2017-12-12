@@ -36,6 +36,7 @@ public class MyApp2Activity extends AppCompatActivity {
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private static final boolean BANNER_LAYOUT = true;
+
     private static final boolean CROSS_LAYOUT = true;
 
     private static final boolean LINEAR_LAYOUT = true;
@@ -94,6 +95,7 @@ public class MyApp2Activity extends AppCompatActivity {
         final List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
 
         if (BANNER_LAYOUT) {
+
 
         }
 

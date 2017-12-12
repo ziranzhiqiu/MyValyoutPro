@@ -78,7 +78,8 @@ public class Main1Activity extends AppCompatActivity {
                 super.onBindViewHolder(holder, position);
                 ArrayList<String> arrayList = new ArrayList<>();
 
-
+                arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
+                arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
                 arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
                 arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
 
@@ -93,11 +94,11 @@ public class Main1Activity extends AppCompatActivity {
                 //设置banner动画效果
                 mBanner.setBannerAnimation(Transformer.DepthPage);
                 //设置标题集合（当banner样式有显示title时）
-                //        mBanner.setBannerTitles(titles);
+                //         mBanner.setBannerTitles(titles);
                 //设置自动轮播，默认为true
                 mBanner.isAutoPlay(true);
                 //设置轮播时间
-                mBanner.setDelayTime(5000);
+                mBanner.setDelayTime(3000);
                 //设置指示器位置（当banner模式中有指示器时）
                 mBanner.setIndicatorGravity(BannerConfig.CENTER);
                 //banner设置方法全部调用完毕时最后调用
