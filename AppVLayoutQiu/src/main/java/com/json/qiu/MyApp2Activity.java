@@ -28,8 +28,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
-public class Main2Activity extends AppCompatActivity {
+/**
+ * Created by JsonQiu on 2017/12/12.
+ */
+public class MyApp2Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -60,19 +62,20 @@ public class Main2Activity extends AppCompatActivity {
     private SubAdapter adapter_skill;
     private SubAdapter adapter_footer;
 
-    private List<String> list=new ArrayList<>();
-    private boolean hasmore=true;
-    private int page=1;
+    private List<String> list = new ArrayList<>();
+    private boolean hasmore = true;
+    private int page = 1;
     private BannerAdapter bAdapter;
 
-    private Handler handler=new Handler();
+    private Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_main);
 
-        recyclerView= (RecyclerView) this.findViewById(R.id.recycler_2_view);
-        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
+        recyclerView = (RecyclerView) this.findViewById(R.id.recycler_2_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
 
         final VirtualLayoutManager layoutManager = new VirtualLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -90,7 +93,7 @@ public class Main2Activity extends AppCompatActivity {
 
         final List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
 
-        if (BANNER_LAYOUT){
+        if (BANNER_LAYOUT) {
 
         }
 
@@ -98,10 +101,10 @@ public class Main2Activity extends AppCompatActivity {
         // 粘性头部 搜索
         if (STICKY_LAYOUT) {
             StickyLayoutHelper layoutHelper = new StickyLayoutHelper();
-            adapter_search= new SubAdapter(this, layoutHelper, 1, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(50))){
+            adapter_search = new SubAdapter(this, layoutHelper, 1, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(50))) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return  new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item_search, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item_search, parent, false));
                 }
 
                 @Override
@@ -113,43 +116,42 @@ public class Main2Activity extends AppCompatActivity {
         }
 
 
-
         //网格布局 分类
         if (GRID_LAYOUT) {
             GridLayoutHelper layoutHelper = new GridLayoutHelper(4);
-            adapter_grid_head=new SubAdapter(this, layoutHelper, 8,new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(100))){
+            adapter_grid_head = new SubAdapter(this, layoutHelper, 8, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(100))) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item, parent, false));
                 }
 
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
-                    ImageView imageView=holder.itemView.findViewById(R.id.img);
-                    TextView title=holder.itemView.findViewById(R.id.title);
-                    if(position==0){
+                    ImageView imageView = holder.itemView.findViewById(R.id.img);
+                    TextView title = holder.itemView.findViewById(R.id.title);
+                    if (position == 0) {
                         imageView.setImageResource(R.drawable.index_03);
                         title.setText(R.string.one);
-                    }else if(position==1){
+                    } else if (position == 1) {
                         imageView.setImageResource(R.drawable.index_05);
                         title.setText(R.string.two);
-                    }else if(position==2){
+                    } else if (position == 2) {
                         imageView.setImageResource(R.drawable.index_07);
                         title.setText(R.string.three);
-                    }else if(position==3){
+                    } else if (position == 3) {
                         imageView.setImageResource(R.drawable.index_11);
                         title.setText(R.string.four);
-                    }else if(position==4){
+                    } else if (position == 4) {
                         imageView.setImageResource(R.drawable.index_15);
                         title.setText(R.string.five);
-                    }else if(position==5){
+                    } else if (position == 5) {
                         imageView.setImageResource(R.drawable.index_16);
                         title.setText(R.string.six);
-                    }else if(position==6){
+                    } else if (position == 6) {
                         imageView.setImageResource(R.drawable.index_17);
                         title.setText(R.string.seven);
-                    }else if(position==7){
+                    } else if (position == 7) {
                         imageView.setImageResource(R.drawable.index_18);
                         title.setText(R.string.eight);
                     }
@@ -160,8 +162,8 @@ public class Main2Activity extends AppCompatActivity {
 
 
         //标题栏 名厨直播
-        if(TITLE_LAYOUT){
-            adapter_singel_title1=new TitleAdapter(Main2Activity.this,getTitleHelper()){
+        if (TITLE_LAYOUT) {
+            adapter_singel_title1 = new TitleAdapter(MyApp2Activity.this, getTitleHelper()) {
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
@@ -175,7 +177,7 @@ public class Main2Activity extends AppCompatActivity {
 
                 @Override
                 protected int[] getDrawables() {
-                    return new int[]{R.drawable.index_zb,R.drawable.arrow};
+                    return new int[]{R.drawable.index_zb, R.drawable.arrow};
                 }
 
             };
@@ -184,10 +186,10 @@ public class Main2Activity extends AppCompatActivity {
         //单行布局 名厨直播
         if (SINGLE_LAYOUT) {
             SingleLayoutHelper layoutHelper = new SingleLayoutHelper();
-            adapter_singel=new SubAdapter(this, layoutHelper, 1){
+            adapter_singel = new SubAdapter(this, layoutHelper, 1) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item_zb, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item_zb, parent, false));
                 }
 
                 @Override
@@ -201,10 +203,10 @@ public class Main2Activity extends AppCompatActivity {
         if (SINGLE_LAYOUT) {
             SingleLayoutHelper layoutHelper = new SingleLayoutHelper();
             layoutHelper.setMarginTop(20);
-            adapter_singel=new SubAdapter(this, layoutHelper, 1){
+            adapter_singel = new SubAdapter(this, layoutHelper, 1) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item_img, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item_img, parent, false));
                 }
 
                 @Override
@@ -215,8 +217,8 @@ public class Main2Activity extends AppCompatActivity {
             adapters.add(adapter_singel);
         }
         //标题栏 发现好厨
-        if(TITLE_LAYOUT) {
-            adapter_singel_title2 = new TitleAdapter(Main2Activity.this,getTitleHelper()) {
+        if (TITLE_LAYOUT) {
+            adapter_singel_title2 = new TitleAdapter(MyApp2Activity.this, getTitleHelper()) {
                 @Override
                 protected String getText() {
                     return getString(R.string.title2);
@@ -224,7 +226,7 @@ public class Main2Activity extends AppCompatActivity {
 
                 @Override
                 protected int[] getDrawables() {
-                    return new int[]{R.drawable.location,R.drawable.arrow};
+                    return new int[]{R.drawable.location, R.drawable.arrow};
                 }
             };
             adapters.add(adapter_singel_title2);
@@ -232,23 +234,23 @@ public class Main2Activity extends AppCompatActivity {
         //网格布局 发现好厨
         if (GRID_LAYOUT) {
             GridLayoutHelper layoutHelper = new GridLayoutHelper(4);
-            adapter_grid_middle=new SubAdapter(this, layoutHelper, 4){
+            adapter_grid_middle = new SubAdapter(this, layoutHelper, 4) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item, parent, false));
                 }
 
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
-                    ImageView imageView=holder.itemView.findViewById(R.id.img);
-                    if(position==0){
+                    ImageView imageView = holder.itemView.findViewById(R.id.img);
+                    if (position == 0) {
                         imageView.setImageResource(R.drawable.index_round1);
-                    }else if(position==1){
+                    } else if (position == 1) {
                         imageView.setImageResource(R.drawable.index_round2);
-                    }else if(position==2){
+                    } else if (position == 2) {
                         imageView.setImageResource(R.drawable.index_round3);
-                    }else if(position==3){
+                    } else if (position == 3) {
                         imageView.setImageResource(R.drawable.index_round4);
                     }
                 }
@@ -258,8 +260,8 @@ public class Main2Activity extends AppCompatActivity {
 
 
         //标题栏 菜品技术
-        if(TITLE_LAYOUT) {
-            adapter_singel_title3 = new TitleAdapter(Main2Activity.this,getTitleHelper()) {
+        if (TITLE_LAYOUT) {
+            adapter_singel_title3 = new TitleAdapter(MyApp2Activity.this, getTitleHelper()) {
                 @Override
                 protected String getText() {
                     return getString(R.string.title3);
@@ -267,7 +269,7 @@ public class Main2Activity extends AppCompatActivity {
 
                 @Override
                 protected int[] getDrawables() {
-                    return new int[]{R.drawable.index_59,R.drawable.arrow};
+                    return new int[]{R.drawable.index_59, R.drawable.arrow};
                 }
             };
             adapters.add(adapter_singel_title3);
@@ -275,22 +277,22 @@ public class Main2Activity extends AppCompatActivity {
         //banner布局 菜品技术
         if (CROSS_LAYOUT) {
             SingleLayoutHelper layoutHelper = new SingleLayoutHelper();
-            adapter_skill=new SubAdapter(this, layoutHelper, 1){
+            adapter_skill = new SubAdapter(this, layoutHelper, 1) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item_skill, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item_skill, parent, false));
                 }
 
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
-                    RecyclerView recyclerView=holder.itemView.findViewById(R.id.banner);
-                    final TextView textView=holder.itemView.findViewById(R.id.title);
-                    LinearLayoutManager linearLayoutManager=new LinearLayoutManager(Main2Activity.this);
+                    RecyclerView recyclerView = holder.itemView.findViewById(R.id.banner);
+                    final TextView textView = holder.itemView.findViewById(R.id.title);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MyApp2Activity.this);
                     linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                     recyclerView.setLayoutManager(linearLayoutManager);
 
-                    bAdapter=new BannerAdapter(Main2Activity.this);
+                    bAdapter = new BannerAdapter(MyApp2Activity.this);
                     recyclerView.setAdapter(bAdapter);
 
                     recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -302,7 +304,7 @@ public class Main2Activity extends AppCompatActivity {
                         @Override
                         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                             super.onScrolled(recyclerView, dx, dy);
-                            int position= (int) recyclerView.findChildViewUnder(200,200).getTag();
+                            int position = (int) recyclerView.findChildViewUnder(200, 200).getTag();
                             textView.setText(getResources().getStringArray(R.array.chiyidun)[position]);
                         }
                     });
@@ -313,10 +315,9 @@ public class Main2Activity extends AppCompatActivity {
         }
 
 
-
         //标题栏 特色食材
-        if(TITLE_LAYOUT) {
-            adapter_singel_title4 = new TitleAdapter(Main2Activity.this,getTitleHelper()) {
+        if (TITLE_LAYOUT) {
+            adapter_singel_title4 = new TitleAdapter(MyApp2Activity.this, getTitleHelper()) {
                 @Override
                 protected String getText() {
                     return getString(R.string.title4);
@@ -324,17 +325,17 @@ public class Main2Activity extends AppCompatActivity {
 
                 @Override
                 protected int[] getDrawables() {
-                    return new int[]{R.drawable.index_left,R.drawable.index_right};
+                    return new int[]{R.drawable.index_left, R.drawable.index_right};
                 }
             };
             adapters.add(adapter_singel_title4);
         }
         //单行列表布局  特色食材
         if (LINEAR_LAYOUT) {
-            for (int i = 0; i <10 ; i++) {
+            for (int i = 0; i < 10; i++) {
                 list.add("abc");
             }
-            LinearLayoutHelper linearLayoutHelper= new LinearLayoutHelper();
+            LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
             adapter_linear = new SubAdapter(this, linearLayoutHelper, list.size()) {
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, int position) {
@@ -343,7 +344,7 @@ public class Main2Activity extends AppCompatActivity {
 
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item2, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item2, parent, false));
                 }
 
                 @Override
@@ -358,21 +359,21 @@ public class Main2Activity extends AppCompatActivity {
         //加载更多布局
         if (FOOTER_LAYOUT) {
             SingleLayoutHelper layoutHelper = new SingleLayoutHelper();
-            adapter_footer=new SubAdapter(this, layoutHelper, 1, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 100)){
+            adapter_footer = new SubAdapter(this, layoutHelper, 1, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 100)) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item_footer, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item_footer, parent, false));
                 }
 
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
-                    TextView textView= holder.itemView.findViewById(R.id.textview);
-                    ProgressBar progressBar=holder.itemView.findViewById(R.id.progressbar);
-                    if(hasmore){
+                    TextView textView = holder.itemView.findViewById(R.id.textview);
+                    ProgressBar progressBar = holder.itemView.findViewById(R.id.progressbar);
+                    if (hasmore) {
                         textView.setText(R.string.loading);
                         progressBar.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         textView.setText(R.string.loadfinish);
                         progressBar.setVisibility(View.GONE);
                     }
@@ -384,13 +385,11 @@ public class Main2Activity extends AppCompatActivity {
     }
 
 
-
-    private  SingleLayoutHelper getTitleHelper(){
-        SingleLayoutHelper helper=new SingleLayoutHelper();
+    private SingleLayoutHelper getTitleHelper() {
+        SingleLayoutHelper helper = new SingleLayoutHelper();
         helper.setMarginTop(20);
         return helper;
     }
-
 
 
     static class SubAdapter extends DelegateAdapter.Adapter<MainViewHolder> {
@@ -414,30 +413,35 @@ public class Main2Activity extends AppCompatActivity {
             this.mCount = count;
             this.mLayoutParams = layoutParams;
         }
+
         @Override
         public LayoutHelper onCreateLayoutHelper() {
             return mLayoutHelper;
         }
+
         @Override
         protected void onBindViewHolderWithOffset(MainViewHolder holder, int position, int offsetTotal) {
         }
 
         @Override
         public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-           return null;
+            return null;
         }
+
         @Override
         public void onBindViewHolder(MainViewHolder holder, int position) {
-            if(mLayoutParams!=null) {
+            if (mLayoutParams != null) {
                 holder.itemView.setLayoutParams(
                         new VirtualLayoutManager.LayoutParams(mLayoutParams));
             }
         }
+
         @Override
         public int getItemCount() {
             return mCount;
         }
     }
+
     static class MainViewHolder extends RecyclerView.ViewHolder {
 
         public MainViewHolder(View itemView) {
@@ -447,40 +451,42 @@ public class Main2Activity extends AppCompatActivity {
     }
 
 
-    abstract class TitleAdapter extends SubAdapter{
+    abstract class TitleAdapter extends SubAdapter {
 
-        public TitleAdapter(Context context,LayoutHelper layoutHelper) {
-            super(context,layoutHelper,1);
+        public TitleAdapter(Context context, LayoutHelper layoutHelper) {
+            super(context, layoutHelper, 1);
         }
 
         @Override
         public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new MainViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_title, parent, false));
         }
+
         @Override
         public void onBindViewHolder(MainViewHolder holder, int position) {
             holder.itemView.setLayoutParams(
-                    new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,dip2px(45)));
-            TextView textView=holder.itemView.findViewById(R.id.title);
+                    new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(45)));
+            TextView textView = holder.itemView.findViewById(R.id.title);
             textView.setText(getText());
-            Drawable drawableLeft= getResources().getDrawable(getDrawables()[0]);
-            Drawable drawableRight= getResources().getDrawable(getDrawables()[1]);
+            Drawable drawableLeft = getResources().getDrawable(getDrawables()[0]);
+            Drawable drawableRight = getResources().getDrawable(getDrawables()[1]);
             drawableLeft.setBounds(0, 0, drawableLeft.getMinimumWidth(), drawableLeft.getMinimumHeight());
             drawableRight.setBounds(0, 0, drawableRight.getMinimumWidth(), drawableRight.getMinimumHeight());
-            textView.setCompoundDrawables(drawableLeft,null,drawableRight,null);
+            textView.setCompoundDrawables(drawableLeft, null, drawableRight, null);
         }
 
-        protected  abstract String getText();
+        protected abstract String getText();
 
 
         protected abstract int[] getDrawables();
     }
 
-     class BannerAdapter extends RecyclerView.Adapter<BannerViewHolder>{
+    class BannerAdapter extends RecyclerView.Adapter<BannerViewHolder> {
 
         Context context;
+
         public BannerAdapter(Context context) {
-            this.context=context;
+            this.context = context;
         }
 
         @Override
@@ -502,9 +508,10 @@ public class Main2Activity extends AppCompatActivity {
 
     static class BannerViewHolder extends RecyclerView.ViewHolder {
         ImageView headimg;
+
         public BannerViewHolder(View itemView) {
             super(itemView);
-            headimg=itemView.findViewById(R.id.headimg);
+            headimg = itemView.findViewById(R.id.headimg);
 
         }
 
@@ -522,29 +529,29 @@ public class Main2Activity extends AppCompatActivity {
             }
 
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if(hasmore) {
-                    VirtualLayoutManager lm = (VirtualLayoutManager)recyclerView.getLayoutManager();
-                    int last=0, total=0;
+                if (hasmore) {
+                    VirtualLayoutManager lm = (VirtualLayoutManager) recyclerView.getLayoutManager();
+                    int last = 0, total = 0;
                     last = lm.findLastVisibleItemPosition();
                     total = recyclerView.getAdapter().getItemCount();
-                    if(last > 0 && last >= total  -1) {
-                        hasmore=false;
+                    if (last > 0 && last >= total - 1) {
+                        hasmore = false;
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                if(page<2) {
+                                if (page < 2) {
                                     for (int i = 0; i < 10; i++) {
                                         list.add("123");
                                     }
                                     adapter_linear.notifyDataSetChanged();
                                     page++;
                                     hasmore = true;
-                                }else{
+                                } else {
                                     hasmore = false;
                                     adapter_footer.notifyDataSetChanged();
                                 }
                             }
-                        },2000);
+                        }, 2000);
 
                     }
                 }

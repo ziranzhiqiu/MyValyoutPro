@@ -10,7 +10,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 
 /**
  * 基类适配器
- * Created by zxl on 2017/8/28.
+ * Created by JsonQiu on 2017/12/11.
  */
 
 public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder> {
