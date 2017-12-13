@@ -244,6 +244,7 @@ public class Home2Activity extends AppCompatActivity {
             };
             adapters.add(adapter_singel_title2);
         }
+
         //网格布局 发现好厨
         if (GRID_LAYOUT) {
             GridLayoutHelper layoutHelper = new GridLayoutHelper(4);
@@ -343,6 +344,7 @@ public class Home2Activity extends AppCompatActivity {
             };
             adapters.add(adapter_singel_title4);
         }
+
         //单行列表布局  特色食材
         if (LINEAR_LAYOUT) {
             for (int i = 0; i < 10; i++) {
