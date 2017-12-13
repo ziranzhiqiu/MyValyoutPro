@@ -3,9 +3,11 @@
     android:id="@+id/ll_menu_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhiteBg"
+    android:background="@color/colorGrayBg"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
 
     <ImageView
         android:id="@+id/iv_menu_home"
@@ -18,8 +20,8 @@
         android:id="@+id/tv_menu_title_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="2dp"
+        android:layout_marginTop="3dp"
         android:text="天猫"
         android:textColor="#666"
-        android:textSize="10sp" />
+        android:textSize="12sp" />
 </LinearLayout>

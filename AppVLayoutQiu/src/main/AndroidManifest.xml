@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MyApp2Activity" />
+        <activity android:name=".Home2Activity" />
         <activity android:name=".Main1Activity" />
 
         <activity android:name=".SplashActivity">

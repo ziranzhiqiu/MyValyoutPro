@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SplashActivity.this,MyApp2Activity.class));
+                startActivity(new Intent(SplashActivity.this,Home2Activity.class));
             }
         });
     }

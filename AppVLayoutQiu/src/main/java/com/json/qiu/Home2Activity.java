@@ -1,6 +1,7 @@
 package com.json.qiu;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,12 +10,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
@@ -31,7 +34,10 @@ import java.util.List;
 /**
  * Created by JsonQiu on 2017/12/12.
  */
-public class MyApp2Activity extends AppCompatActivity {
+public class Home2Activity extends AppCompatActivity {
+
+    public static final String TAG = "Home2Activity";
+
     private RecyclerView recyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -69,11 +75,15 @@ public class MyApp2Activity extends AppCompatActivity {
     private BannerAdapter bAdapter;
 
     private Handler handler = new Handler();
+    private Home2Activity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_main);
+        mContext = this;
+        Log.e(TAG,"-----2222222222222222222-----");
+        Toast.makeText(this,"Home2Activity",Toast.LENGTH_SHORT).show();
 
         recyclerView = (RecyclerView) this.findViewById(R.id.recycler_2_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
@@ -95,18 +105,19 @@ public class MyApp2Activity extends AppCompatActivity {
         final List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
 
         if (BANNER_LAYOUT) {
-
-
         }
 
 
         // 粘性头部 搜索
         if (STICKY_LAYOUT) {
             StickyLayoutHelper layoutHelper = new StickyLayoutHelper();
+//           layoutHelper.setBgColor(Color.RED);
+//           为啥设置无效呢？   setMargin——setPadding——setBgColor ？？JsonQiu？？谁知道告诉我，谢谢！ QQ  1143986647
+            layoutHelper.setBgColor(mContext.getResources().getColor(R.color.colorGrayBg));
             adapter_search = new SubAdapter(this, layoutHelper, 1, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(50))) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item_search, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item_search, parent, false));
                 }
 
                 @Override
@@ -124,7 +135,7 @@ public class MyApp2Activity extends AppCompatActivity {
             adapter_grid_head = new SubAdapter(this, layoutHelper, 8, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(100))) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item, parent, false));
                 }
 
                 @Override
@@ -165,7 +176,7 @@ public class MyApp2Activity extends AppCompatActivity {
 
         //标题栏 名厨直播
         if (TITLE_LAYOUT) {
-            adapter_singel_title1 = new TitleAdapter(MyApp2Activity.this, getTitleHelper()) {
+            adapter_singel_title1 = new TitleAdapter(Home2Activity.this, getTitleHelper()) {
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
@@ -191,7 +202,7 @@ public class MyApp2Activity extends AppCompatActivity {
             adapter_singel = new SubAdapter(this, layoutHelper, 1) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item_zb, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item_zb, parent, false));
                 }
 
                 @Override
@@ -208,7 +219,7 @@ public class MyApp2Activity extends AppCompatActivity {
             adapter_singel = new SubAdapter(this, layoutHelper, 1) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item_img, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item_img, parent, false));
                 }
 
                 @Override
@@ -220,7 +231,7 @@ public class MyApp2Activity extends AppCompatActivity {
         }
         //标题栏 发现好厨
         if (TITLE_LAYOUT) {
-            adapter_singel_title2 = new TitleAdapter(MyApp2Activity.this, getTitleHelper()) {
+            adapter_singel_title2 = new TitleAdapter(Home2Activity.this, getTitleHelper()) {
                 @Override
                 protected String getText() {
                     return getString(R.string.title2);
@@ -239,7 +250,7 @@ public class MyApp2Activity extends AppCompatActivity {
             adapter_grid_middle = new SubAdapter(this, layoutHelper, 4) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item, parent, false));
                 }
 
                 @Override
@@ -263,7 +274,7 @@ public class MyApp2Activity extends AppCompatActivity {
 
         //标题栏 菜品技术
         if (TITLE_LAYOUT) {
-            adapter_singel_title3 = new TitleAdapter(MyApp2Activity.this, getTitleHelper()) {
+            adapter_singel_title3 = new TitleAdapter(Home2Activity.this, getTitleHelper()) {
                 @Override
                 protected String getText() {
                     return getString(R.string.title3);
@@ -282,7 +293,7 @@ public class MyApp2Activity extends AppCompatActivity {
             adapter_skill = new SubAdapter(this, layoutHelper, 1) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item_skill, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item_skill, parent, false));
                 }
 
                 @Override
@@ -290,11 +301,11 @@ public class MyApp2Activity extends AppCompatActivity {
                     super.onBindViewHolder(holder, position);
                     RecyclerView recyclerView = holder.itemView.findViewById(R.id.banner);
                     final TextView textView = holder.itemView.findViewById(R.id.title);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MyApp2Activity.this);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Home2Activity.this);
                     linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                     recyclerView.setLayoutManager(linearLayoutManager);
 
-                    bAdapter = new BannerAdapter(MyApp2Activity.this);
+                    bAdapter = new BannerAdapter(Home2Activity.this);
                     recyclerView.setAdapter(bAdapter);
 
                     recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -319,7 +330,7 @@ public class MyApp2Activity extends AppCompatActivity {
 
         //标题栏 特色食材
         if (TITLE_LAYOUT) {
-            adapter_singel_title4 = new TitleAdapter(MyApp2Activity.this, getTitleHelper()) {
+            adapter_singel_title4 = new TitleAdapter(Home2Activity.this, getTitleHelper()) {
                 @Override
                 protected String getText() {
                     return getString(R.string.title4);
@@ -346,7 +357,7 @@ public class MyApp2Activity extends AppCompatActivity {
 
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item2, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item2, parent, false));
                 }
 
                 @Override
@@ -364,7 +375,7 @@ public class MyApp2Activity extends AppCompatActivity {
             adapter_footer = new SubAdapter(this, layoutHelper, 1, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 100)) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(MyApp2Activity.this).inflate(R.layout.item_footer, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item_footer, parent, false));
                 }
 
                 @Override

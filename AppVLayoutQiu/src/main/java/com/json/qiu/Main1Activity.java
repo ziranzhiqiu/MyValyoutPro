@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ import java.util.List;
  */
 public class Main1Activity extends AppCompatActivity {
 
+    public static final String TAG = "Main1Activity";
+
     //不同item必须不同的viewtype
     int BANNER_VIEW_TYPE = 1;
     int MENU_VIEW_TYPE = 2;
@@ -46,11 +49,15 @@ public class Main1Activity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private List<DelegateAdapter.Adapter> mAdapters; //存放各个模块的适配器
+    private Main1Activity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_1_main);
+        mActivity = this;
+        Log.e(TAG,"-----1111111111111111111-----");
+        Toast.makeText(this,"Main1Activity",Toast.LENGTH_SHORT).show();
         initView();
         initData();
     }
@@ -107,7 +114,7 @@ public class Main1Activity extends AppCompatActivity {
                 mBanner.setOnBannerListener(new OnBannerListener() {
                     @Override
                     public void OnBannerClick(int position) {
-                        Toast.makeText(getApplicationContext(), "banner点击了" + position, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "banner点击 position = " + position, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -118,12 +125,14 @@ public class Main1Activity extends AppCompatActivity {
         //menu
         // 在构造函数设置每行的网格个数
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(5);
-        gridLayoutHelper.setPadding(0, 16, 0, 16);
-        gridLayoutHelper.setVGap(16);// 控制子元素之间的垂直间距
+        //为啥设置无效呢？   setMargin——setPadding——setBgColor ？？JsonQiu？？谁知道告诉我，谢谢！ QQ  1143986647
+        gridLayoutHelper.setMargin(30,30,30,30);
+        gridLayoutHelper.setPadding(0, 20, 0, 20);
+        gridLayoutHelper.setVGap(20);// 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(0);// 控制子元素之间的水平间距
-        gridLayoutHelper.setBgColor(Color.WHITE);
-        BaseDelegateAdapter menuAdapter = new BaseDelegateAdapter(this, gridLayoutHelper, R.layout.vlayout_menu
-                , 10, MENU_VIEW_TYPE) {
+        gridLayoutHelper.setBgColor(Color.RED);
+        BaseDelegateAdapter menuAdapter =
+                new BaseDelegateAdapter(mActivity, gridLayoutHelper, R.layout.vlayout_menu, 10, MENU_VIEW_TYPE) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
@@ -140,7 +149,10 @@ public class Main1Activity extends AppCompatActivity {
         mAdapters.add(menuAdapter);
 
         //news
-        BaseDelegateAdapter newsAdapter = new BaseDelegateAdapter(this, new LinearLayoutHelper()
+        LinearLayoutHelper newsHelper = new LinearLayoutHelper();
+        newsHelper.setBgColor(Color.RED);
+        newsHelper.setMargin(0,10,0,10);
+        BaseDelegateAdapter newsAdapter = new BaseDelegateAdapter(this, newsHelper
                 , R.layout.vlayout_news, 1, NEWS_VIEW_TYPE) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
@@ -178,10 +190,30 @@ public class Main1Activity extends AppCompatActivity {
         };
         mAdapters.add(newsAdapter);
 
+
+
         //这里我就循环item 实际项目中不同的ITEM 继续往下走就行
         for (int i = 0; i < ITEM_URL.length; i++) {
             //item1 title
             final int finalI = i;
+
+            //标题栏
+            BaseDelegateAdapter itemAdapter = new BaseDelegateAdapter(this, new LinearLayoutHelper()
+                    , R.layout.vlayout_title_more_bar, 1, NEWS_VIEW_TYPE) {
+                @Override
+                public void onBindViewHolder(BaseViewHolder holder, int position) {
+                    super.onBindViewHolder(holder, position);
+                    holder.setText(R.id.tv_title_name,    "JsonQiu分类JsonQiu 第 "+finalI + " 个");
+                    holder.getView(R.id.main_title_more).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(getApplicationContext(), "JsonQiu分类JsonQiu 的更多内容", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            };
+            mAdapters.add(itemAdapter);
+
             BaseDelegateAdapter titleAdapter = new BaseDelegateAdapter(this, new LinearLayoutHelper(), R.layout.vlayout_title, 1, TITLE_VIEW_TYPE) {
                 @Override
                 public void onBindViewHolder(BaseViewHolder holder, int position) {
