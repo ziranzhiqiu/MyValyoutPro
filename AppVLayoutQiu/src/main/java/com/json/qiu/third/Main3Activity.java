@@ -532,7 +532,6 @@ public class Main3Activity extends AppCompatActivity implements MyItemClickListe
         adapters.add(Adapter_StaggeredGridLayout);
 
 
-        //
         // 3. 创建DelegateAdapter对象 & 将layoutManager绑定到DelegateAdapter
         DelegateAdapter delegateAdapter = new DelegateAdapter(layoutManager);
 
@@ -563,8 +562,6 @@ public class Main3Activity extends AppCompatActivity implements MyItemClickListe
     // 点击事件的回调函数
     @Override
     public void onItemClick(View view, int postion) {
-        System.out.println("点击了第" + postion + "行");
-        Toast.makeText(this, (String) listItem.get(postion).get("ItemTitle"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "点击了第" + postion + "行    "+  listItem.get(postion).get("ItemTitle"), Toast.LENGTH_SHORT).show();
     }
-
 }
