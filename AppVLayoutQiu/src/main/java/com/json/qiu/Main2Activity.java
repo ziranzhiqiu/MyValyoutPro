@@ -34,9 +34,9 @@ import java.util.List;
 /**
  * Created by JsonQiu on 2017/12/12.
  */
-public class Home2Activity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity {
 
-    public static final String TAG = "Home2Activity";
+    public static final String TAG = "Main2Activity";
 
     private RecyclerView recyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -75,7 +75,7 @@ public class Home2Activity extends AppCompatActivity {
     private BannerAdapter bAdapter;
 
     private Handler handler = new Handler();
-    private Home2Activity mContext;
+    private Main2Activity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class Home2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_2_main);
         mContext = this;
         Log.e(TAG, "-----2222222222222222222-----");
-        Toast.makeText(this, "Home2Activity", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Main2Activity", Toast.LENGTH_SHORT).show();
 
         recyclerView = (RecyclerView) this.findViewById(R.id.recycler_2_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
@@ -117,7 +117,7 @@ public class Home2Activity extends AppCompatActivity {
             adapter_search = new SubAdapter(this, layoutHelper, 1, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(50))) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item_search, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item_search, parent, false));
                 }
 
                 @Override
@@ -141,14 +141,14 @@ public class Home2Activity extends AppCompatActivity {
             adapter_grid_head = new SubAdapter(this, layoutHelper, 8, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(100))) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item, parent, false));
                 }
 
                 @Override
                 public void onBindViewHolder(final MainViewHolder holder, final int position) {
                     super.onBindViewHolder(holder, position);
-                    ImageView imageView = holder.itemView.findViewById(R.id.img);
-                    TextView title = holder.itemView.findViewById(R.id.title);
+                    ImageView imageView = (ImageView) holder.itemView.findViewById(R.id.img);
+                    TextView title = (TextView) holder.itemView.findViewById(R.id.title);
                     if (position == 0) {
                         imageView.setImageResource(R.drawable.index_03);
                         title.setText(R.string.one);
@@ -188,7 +188,7 @@ public class Home2Activity extends AppCompatActivity {
 
         //标题栏 名厨直播
         if (TITLE_LAYOUT) {
-            adapter_singel_title1 = new TitleAdapter(Home2Activity.this, getTitleHelper()) {
+            adapter_singel_title1 = new TitleAdapter(Main2Activity.this, getTitleHelper()) {
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
@@ -213,7 +213,7 @@ public class Home2Activity extends AppCompatActivity {
             adapter_singel = new SubAdapter(this, layoutHelper, 1) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item_zb, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item_zb, parent, false));
                 }
 
                 @Override
@@ -254,7 +254,7 @@ public class Home2Activity extends AppCompatActivity {
             adapter_singel = new SubAdapter(this, layoutHelper, 1) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item_img, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item_img, parent, false));
                 }
 
                 @Override
@@ -272,7 +272,7 @@ public class Home2Activity extends AppCompatActivity {
         }
         //标题栏 发现好厨
         if (TITLE_LAYOUT) {
-            adapter_singel_title2 = new TitleAdapter(Home2Activity.this, getTitleHelper()) {
+            adapter_singel_title2 = new TitleAdapter(Main2Activity.this, getTitleHelper()) {
                 @Override
                 protected String getText() {
                     return getString(R.string.title2);
@@ -292,13 +292,13 @@ public class Home2Activity extends AppCompatActivity {
             adapter_grid_middle = new SubAdapter(this, layoutHelper, 4) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item, parent, false));
                 }
 
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, final int position) {
                     super.onBindViewHolder(holder, position);
-                    ImageView imageView = holder.itemView.findViewById(R.id.img);
+                    ImageView imageView = (ImageView) holder.itemView.findViewById(R.id.img);
                     if (position == 0) {
                         imageView.setImageResource(R.drawable.index_round1);
                     } else if (position == 1) {
@@ -341,20 +341,20 @@ public class Home2Activity extends AppCompatActivity {
             adapter_skill = new SubAdapter(this, layoutHelper, 1) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item_skill, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item_skill, parent, false));
                 }
 
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, final int position) {
                     super.onBindViewHolder(holder, position);
-                    RecyclerView recyclerView = holder.itemView.findViewById(R.id.banner);
-                    final TextView tvTitle = holder.itemView.findViewById(R.id.title);
-                    final TextView tvAuthor = holder.itemView.findViewById(R.id.author);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Home2Activity.this);
+                    RecyclerView recyclerView = (RecyclerView) holder.itemView.findViewById(R.id.banner);
+                    final TextView tvTitle = (TextView) holder.itemView.findViewById(R.id.title);
+                    final TextView tvAuthor = (TextView) holder.itemView.findViewById(R.id.author);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Main2Activity.this);
                     linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                     recyclerView.setLayoutManager(linearLayoutManager);
 
-                    bAdapter = new BannerAdapter(Home2Activity.this);
+                    bAdapter = new BannerAdapter(Main2Activity.this);
                     recyclerView.setAdapter(bAdapter);
 
                     recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -391,7 +391,7 @@ public class Home2Activity extends AppCompatActivity {
 
         //标题栏 特色食材
         if (TITLE_LAYOUT) {
-            adapter_singel_title4 = new TitleAdapter(Home2Activity.this, getTitleHelper()) {
+            adapter_singel_title4 = new TitleAdapter(Main2Activity.this, getTitleHelper()) {
                 @Override
                 protected String getText() {
                     return getString(R.string.title4);
@@ -440,7 +440,7 @@ public class Home2Activity extends AppCompatActivity {
 
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item2, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item2, parent, false));
                 }
 
                 @Override
@@ -458,14 +458,14 @@ public class Home2Activity extends AppCompatActivity {
             adapter_footer = new SubAdapter(this, layoutHelper, 1, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 100)) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    return new MainViewHolder(LayoutInflater.from(Home2Activity.this).inflate(R.layout.item_footer, parent, false));
+                    return new MainViewHolder(LayoutInflater.from(Main2Activity.this).inflate(R.layout.item_footer, parent, false));
                 }
 
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
-                    TextView textView = holder.itemView.findViewById(R.id.textview);
-                    ProgressBar progressBar = holder.itemView.findViewById(R.id.progressbar);
+                    TextView textView = (TextView) holder.itemView.findViewById(R.id.textview);
+                    ProgressBar progressBar = (ProgressBar) holder.itemView.findViewById(R.id.progressbar);
                     if (hasmore) {
                         textView.setText(R.string.loading);
                         progressBar.setVisibility(View.VISIBLE);
@@ -562,7 +562,7 @@ public class Home2Activity extends AppCompatActivity {
         public void onBindViewHolder(MainViewHolder holder, final int position) {
             holder.itemView.setLayoutParams(
                     new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(45)));
-            TextView textView = holder.itemView.findViewById(R.id.title);
+            TextView textView = (TextView) holder.itemView.findViewById(R.id.title);
             textView.setText(getText());
             Drawable drawableLeft = getResources().getDrawable(getDrawables()[0]);
             Drawable drawableRight = getResources().getDrawable(getDrawables()[1]);
@@ -621,7 +621,7 @@ public class Home2Activity extends AppCompatActivity {
 
         public BannerViewHolder(View itemView) {
             super(itemView);
-            headimg = itemView.findViewById(R.id.headimg);
+            headimg = (ImageView) itemView.findViewById(R.id.headimg);
 
         }
 
