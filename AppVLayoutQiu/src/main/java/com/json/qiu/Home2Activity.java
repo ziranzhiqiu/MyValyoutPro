@@ -322,7 +322,7 @@ public class Home2Activity extends AppCompatActivity {
 
         //标题栏 菜品技术
         if (TITLE_LAYOUT) {
-            adapter_singel_title3 = new TitleAdapter(Home2Activity.this, getTitleHelper()) {
+            adapter_singel_title3 = new TitleAdapter(mContext, getTitleHelper()) {
                 @Override
                 protected String getText() {
                     return getString(R.string.title3);

@@ -1,9 +1,11 @@
 package com.json.qiu;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.json.qiu.third.Main3Activity;
 
 /**
  * Created by JsonQiu on 2017/12/10.
@@ -24,6 +26,12 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SplashActivity.this,Home2Activity.class));
+            }
+        });
+        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SplashActivity.this,Main3Activity.class));
             }
         });
     }

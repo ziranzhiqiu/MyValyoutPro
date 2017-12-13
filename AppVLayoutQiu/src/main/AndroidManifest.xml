@@ -11,6 +11,7 @@
 
         <activity android:name=".Home2Activity" />
         <activity android:name=".Main1Activity" />
+        <activity android:name=".third.Main3Activity" />
 
         <activity android:name=".SplashActivity">
             <intent-filter>
