@@ -30,6 +30,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:gravity="center"
+    android:id="@+id/main_grid"
     android:paddingBottom="10dp">
     <ImageView
         android:id="@+id/img"

@@ -82,8 +82,8 @@ public class Home2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_main);
         mContext = this;
-        Log.e(TAG,"-----2222222222222222222-----");
-        Toast.makeText(this,"Home2Activity",Toast.LENGTH_SHORT).show();
+        Log.e(TAG, "-----2222222222222222222-----");
+        Toast.makeText(this, "Home2Activity", Toast.LENGTH_SHORT).show();
 
         recyclerView = (RecyclerView) this.findViewById(R.id.recycler_2_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
@@ -111,9 +111,9 @@ public class Home2Activity extends AppCompatActivity {
         // 粘性头部 搜索
         if (STICKY_LAYOUT) {
             StickyLayoutHelper layoutHelper = new StickyLayoutHelper();
-//           layoutHelper.setBgColor(Color.RED);
-//           为啥设置无效呢？   setMargin——setPadding——setBgColor ？？JsonQiu？？谁知道告诉我，谢谢！ QQ  1143986647
-            layoutHelper.setBgColor(mContext.getResources().getColor(R.color.colorGrayBg));
+            layoutHelper.setBgColor(Color.RED);
+//            为啥设置无效呢？   setMargin——setPadding——setBgColor ？？JsonQiu？？谁知道告诉我，谢谢！ QQ  1143986647
+//            layoutHelper.setBgColor(mContext.getResources().getColor(R.color.colorGrayBg));
             adapter_search = new SubAdapter(this, layoutHelper, 1, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(50))) {
                 @Override
                 public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -121,8 +121,14 @@ public class Home2Activity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(MainViewHolder holder, final int position) {
                     super.onBindViewHolder(holder, position);
+                    holder.itemView.findViewById(R.id.search_main).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, " 点击   搜索   的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             };
             adapters.add(adapter_search);
@@ -139,7 +145,7 @@ public class Home2Activity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(final MainViewHolder holder, final int position) {
                     super.onBindViewHolder(holder, position);
                     ImageView imageView = holder.itemView.findViewById(R.id.img);
                     TextView title = holder.itemView.findViewById(R.id.title);
@@ -168,6 +174,12 @@ public class Home2Activity extends AppCompatActivity {
                         imageView.setImageResource(R.drawable.index_18);
                         title.setText(R.string.eight);
                     }
+                    holder.itemView.findViewById(R.id.main_grid).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, " 点击   -" + ((TextView) (holder.itemView.findViewById(R.id.title))).getText() + "-   的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             };
             adapters.add(adapter_grid_head);
@@ -180,7 +192,6 @@ public class Home2Activity extends AppCompatActivity {
                 @Override
                 public void onBindViewHolder(MainViewHolder holder, int position) {
                     super.onBindViewHolder(holder, position);
-
                 }
 
                 @Override
@@ -206,8 +217,32 @@ public class Home2Activity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(MainViewHolder holder, final int position) {
                     super.onBindViewHolder(holder, position);
+                    holder.itemView.findViewById(R.id.headimg).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, " 点击   -名厨直播-图片   的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    holder.itemView.findViewById(R.id.title).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, " 点击   -名厨直播-标题   的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    holder.itemView.findViewById(R.id.time).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, " 点击   -名厨直播-时间   的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    holder.itemView.findViewById(R.id.author).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, " 点击   -名厨直播-作者   的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             };
             adapters.add(adapter_singel);
@@ -223,8 +258,14 @@ public class Home2Activity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(MainViewHolder holder, final int position) {
                     super.onBindViewHolder(holder, position);
+                    holder.itemView.findViewById(R.id.ad_pic).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, " 点击   -广告-   的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             };
             adapters.add(adapter_singel);
@@ -255,7 +296,7 @@ public class Home2Activity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(MainViewHolder holder, final int position) {
                     super.onBindViewHolder(holder, position);
                     ImageView imageView = holder.itemView.findViewById(R.id.img);
                     if (position == 0) {
@@ -267,6 +308,12 @@ public class Home2Activity extends AppCompatActivity {
                     } else if (position == 3) {
                         imageView.setImageResource(R.drawable.index_round4);
                     }
+                    holder.itemView.findViewById(R.id.main_grid).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, "发现好厨    点击的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             };
             adapters.add(adapter_grid_middle);
@@ -298,10 +345,11 @@ public class Home2Activity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(MainViewHolder holder, final int position) {
                     super.onBindViewHolder(holder, position);
                     RecyclerView recyclerView = holder.itemView.findViewById(R.id.banner);
-                    final TextView textView = holder.itemView.findViewById(R.id.title);
+                    final TextView tvTitle = holder.itemView.findViewById(R.id.title);
+                    final TextView tvAuthor = holder.itemView.findViewById(R.id.author);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Home2Activity.this);
                     linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                     recyclerView.setLayoutManager(linearLayoutManager);
@@ -319,10 +367,22 @@ public class Home2Activity extends AppCompatActivity {
                         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                             super.onScrolled(recyclerView, dx, dy);
                             int position = (int) recyclerView.findChildViewUnder(200, 200).getTag();
-                            textView.setText(getResources().getStringArray(R.array.chiyidun)[position]);
+                            tvTitle.setText(getResources().getStringArray(R.array.chiyidun)[position]);
                         }
                     });
 
+                    holder.itemView.findViewById(R.id.title).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, "点击   -Banner标题-  " + tvTitle.getText() + "   的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    holder.itemView.findViewById(R.id.author).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, "点击   -Banner作者-  " + tvAuthor.getText() + "   的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             };
             adapters.add(adapter_skill);
@@ -353,8 +413,29 @@ public class Home2Activity extends AppCompatActivity {
             LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
             adapter_linear = new SubAdapter(this, linearLayoutHelper, list.size()) {
                 @Override
-                public void onBindViewHolder(MainViewHolder holder, int position) {
+                public void onBindViewHolder(MainViewHolder holder, final int position) {
                     super.onBindViewHolder(holder, position);
+
+                    ((TextView) (holder.itemView.findViewById(R.id.oldprice))).setText("12.0" + position);
+                    ((TextView) (holder.itemView.findViewById(R.id.nowprice))).setText("10.0" + position);
+                    holder.itemView.findViewById(R.id.image).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, "图片+++LINEAR_LAYOUT    点击的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    holder.itemView.findViewById(R.id.name).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, "文字+++LINEAR_LAYOUT    点击的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    holder.itemView.findViewById(R.id.add_to).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, "加入+++LINEAR_LAYOUT    点击的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
 
                 @Override
@@ -478,7 +559,7 @@ public class Home2Activity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(MainViewHolder holder, int position) {
+        public void onBindViewHolder(MainViewHolder holder, final int position) {
             holder.itemView.setLayoutParams(
                     new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(45)));
             TextView textView = holder.itemView.findViewById(R.id.title);
@@ -488,6 +569,14 @@ public class Home2Activity extends AppCompatActivity {
             drawableLeft.setBounds(0, 0, drawableLeft.getMinimumWidth(), drawableLeft.getMinimumHeight());
             drawableRight.setBounds(0, 0, drawableRight.getMinimumWidth(), drawableRight.getMinimumHeight());
             textView.setCompoundDrawables(drawableLeft, null, drawableRight, null);
+
+            holder.itemView.findViewById(R.id.title_main).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Toast.makeText(mContext, getText() + "    点击的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         protected abstract String getText();
@@ -510,8 +599,14 @@ public class Home2Activity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(BannerViewHolder holder, int position) {
+        public void onBindViewHolder(BannerViewHolder holder, final int position) {
             holder.itemView.setTag(position);
+            holder.itemView.findViewById(R.id.headimg).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mContext, "BannerAdapter 点击的位置 position = " + position, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         @Override
